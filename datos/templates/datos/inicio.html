@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Analizador de representación de datos</title>
+<style>
+:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#172b45;background:#eef3f9}*{box-sizing:border-box}body{margin:0}main{max-width:1100px;margin:auto;padding:48px 24px}header{margin-bottom:32px}.tag{font-size:12px;letter-spacing:2px;font-weight:700;color:#3156bc}h1{font-size:clamp(28px,4vw,42px);line-height:1.15;max-width:750px;margin:12px 0}p{color:#50627a;line-height:1.6}.grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}section{background:white;border:1px solid #dce4f0;border-radius:18px;padding:26px;box-shadow:0 6px 22px #182a4410}h2{font-size:21px;margin:0 0 8px}.number{font-size:12px;color:#3156bc;font-weight:700}label{display:block;margin:18px 0 7px;font-weight:600;font-size:14px}input,select{width:100%;padding:12px;border:1px solid #a6b5ca;border-radius:8px;background:white;font:inherit;color:#172b45}input:focus,select:focus{outline:3px solid #c8d9ff;border-color:#3156bc}button{margin:20px 0 0;background:#244bc5;color:white;border:0;border-radius:8px;padding:12px 20px;font:inherit;font-weight:600;cursor:pointer}.errorlist{color:#a21c2b;background:#fff1f1;border-radius:6px;padding:10px 10px 10px 28px;font-size:14px}.result{margin-top:24px;border-top:1px solid #dce4f0;padding-top:16px}dl{margin:0}dl div{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #edf1f6}dt{color:#50627a}dd{margin:0;font-family:ui-monospace,monospace;overflow-wrap:anywhere;text-align:right}.stats{background:#eef3ff;border-radius:8px;padding:12px;color:#24418a;font-size:14px}.tablewrap{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:10px 8px;text-align:left;border-bottom:1px solid #e2e8f0}th{color:#50627a}td{font-family:ui-monospace,monospace;white-space:pre}.note{font-size:13px}footer{margin-top:26px;font-size:13px;color:#50627a}@media(max-width:780px){.grid{grid-template-columns:1fr}main{padding:28px 16px}section{padding:20px}}
+</style>
+</head>
+<body><main>
+<header><div class="tag">SISTEMAS NUMÉRICOS · UNICODE</div><h1>Analizador de representación de datos</h1><p>Explora cómo un número y un texto se representan en la computadora.</p></header>
+<div class="grid">
+<section aria-labelledby="titulo-numero"><span class="number">01 / NÚMEROS</span><h2 id="titulo-numero">Convierte entre bases</h2><p>Valores enteros entre 0 y 65 535, sin prefijos.</p>
+<form method="post" novalidate>{% csrf_token %}<input type="hidden" name="accion" value="numero">
+{{ numero_form.non_field_errors }}
+{% for field in numero_form %}<label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}{{ field.errors }}{% endfor %}
+<button type="submit">Convertir número</button></form>
+{% if numero %}<div class="result" aria-live="polite"><h3>Resultado</h3><dl>
+<div><dt>Decimal · base 10</dt><dd>{{ numero.decimal }}</dd></div>
+<div><dt>Binario · base 2</dt><dd>{{ numero.binario }}</dd></div>
+<div><dt>Octal · base 8</dt><dd>{{ numero.octal }}</dd></div>
+<div><dt>Hexadecimal · base 16</dt><dd>{{ numero.hexadecimal }}</dd></div>
+</dl><p class="stats">{{ numero.bits }} bits significativos · {{ numero.bytes }} byte(s) · {{ numero.ancho }} bits de representación</p></div>{% endif %}
+<p class="note">El binario se completa con ceros a 8, 16, 24… bits. Para el cero se usa la convención de 1 bit significativo y 1 byte.</p>
+</section>
+<section aria-labelledby="titulo-texto"><span class="number">02 / CARACTERES</span><h2 id="titulo-texto">Analiza el texto</h2><p>Consulta los puntos de código y los bytes UTF-8.</p>
+<form method="post" novalidate>{% csrf_token %}<input type="hidden" name="accion" value="texto">
+{{ texto_form.non_field_errors }}
+{% for field in texto_form %}<label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}{{ field.errors }}{% endfor %}
+<button type="submit">Analizar texto</button></form>
+{% if texto %}<div class="result" aria-live="polite"><p class="stats">{{ texto.caracteres }} caracteres · {{ texto.bytes }} bytes UTF-8</p>
+<div class="tablewrap"><table><caption>Representación de cada carácter</caption><thead><tr><th>Carácter</th><th>Decimal</th><th>U+</th><th>Hex</th><th>UTF-8</th></tr></thead><tbody>
+{% for fila in texto.filas %}<tr><td>{{ fila.caracter }}</td><td>{{ fila.decimal }}</td><td>{{ fila.punto }}</td><td>{{ fila.hexadecimal }}</td><td>{{ fila.utf8 }}</td></tr>{% endfor %}
+</tbody></table></div></div>{% endif %}
+<p class="note">Un carácter puede ocupar varios bytes. La ñ es U+00F1 y se codifica como C3 B1 en UTF-8.</p>
+</section>
+</div><footer>Python 3.12 + Django · Arquitectura de computadoras</footer>
+</main></body></html>

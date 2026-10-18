@@ -1,0 +1,24 @@
+test_base_invalida (datos.tests.ConversionTests.test_base_invalida) ... ok
+test_bases_validas (datos.tests.ConversionTests.test_bases_validas) ... ok
+test_digitos_invalidos (datos.tests.ConversionTests.test_digitos_invalidos) ... ok
+test_entrada_vacia (datos.tests.ConversionTests.test_entrada_vacia) ... ok
+test_fuera_de_rango (datos.tests.ConversionTests.test_fuera_de_rango) ... ok
+test_hex_minusculas_y_ceros (datos.tests.ConversionTests.test_hex_minusculas_y_ceros) ... ok
+test_limites_de_byte (datos.tests.ConversionTests.test_limites_de_byte) ... ok
+test_negativos (datos.tests.ConversionTests.test_negativos) ... ok
+test_ano_utf8 (datos.tests.TextoTests.test_ano_utf8) ... ok
+test_espacios_y_emoji (datos.tests.TextoTests.test_espacios_y_emoji) ... ok
+test_maximo_y_vacio (datos.tests.TextoTests.test_maximo_y_vacio) ... ok
+test_accion_invalida (datos.tests.VistaTests.test_accion_invalida) ... ok
+test_csrf (datos.tests.VistaTests.test_csrf) ... ok
+test_error_sin_resultado (datos.tests.VistaTests.test_error_sin_resultado) ... ok
+test_get_y_conversion (datos.tests.VistaTests.test_get_y_conversion) ... ok
+test_texto_escapado_y_utf8 (datos.tests.VistaTests.test_texto_escapado_y_utf8) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.034s
+
+OK
+Found 16 test(s).
+Skipping setup of unused database(s): default.
+System check identified no issues (0 silenced).

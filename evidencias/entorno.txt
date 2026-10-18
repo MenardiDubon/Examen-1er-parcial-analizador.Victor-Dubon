@@ -1,0 +1,8 @@
+Verificación local real
+Python 3.12.14
+Django 5.2.18
+asgiref 3.12.1
+sqlparse 0.6.0
+16 pruebas: OK
+manage.py check: sin problemas
+Docker: no disponible en este entorno; pendiente de verificar en el equipo de entrega.
