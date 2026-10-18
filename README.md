@@ -1,4 +1,7 @@
 # Analizador de representación de datos
+#### Video demostrativo
+
+[▶ Ver video de la aplicación funcionando en Docker](https://drive.google.com/file/d/1LBF99VX34-cWThFgVjx0JLfURfmTmWJ7/view?usp=sharing)
 
 Aplicación académica en Python 3.12 y Django 5.2. Dos formularios independientes
 convierten enteros entre bases y muestran los puntos de código Unicode y bytes
